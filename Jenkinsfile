@@ -4,8 +4,8 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
-                // Compile the source code using Maven Wrapper
-                sh './mvnw compile'
+                // Compile the source code using Maven
+                bat 'mvn compile'
             }
             post {
                 success {
@@ -18,8 +18,8 @@ pipeline {
         }
         stage('Test') {
             steps {
-                // Run tests using Maven Wrapper
-                sh './mvnw test'
+                // Run tests using Maven
+                bat 'mvn test'
             }
             post {
                 success {
@@ -32,3 +32,4 @@ pipeline {
         }
     }
 }
+
