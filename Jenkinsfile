@@ -21,13 +21,6 @@ pipeline {
             }
         }
     }
-    
-    post {
-        always {
-            // Publish JUnit test results
-            junit '**/target/surefire-reports/*.xml'
-        }
-    }
 }
 
 
