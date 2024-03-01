@@ -1,33 +1,17 @@
 pipeline {
     agent any
-
+    
     stages {
-        stage('Compile') {
+        stage('Build') {
             steps {
-                // Compile the source code using Maven
-                bat 'mvn compile'
-            }
-            post {
-                success {
-                    echo 'Compilation successful!'
-                }
-                failure {
-                    echo 'Compilation failed!'
-                }
+                // Your build steps here
+                bat 'mvn clean compile'
             }
         }
         stage('Test') {
             steps {
-                // Run tests using Maven
+                // Run tests
                 bat 'mvn test'
-            }
-            post {
-                success {
-                    echo 'Tests passed!'
-                }
-                failure {
-                    echo 'Tests failed!'
-                }
             }
         }
         stage('Deploy') {
@@ -35,16 +19,16 @@ pipeline {
                 // Deploy artifacts using Maven
                 bat 'mvn deploy'
             }
-            post {
-                success {
-                    echo 'Deployment successful!'
-                }
-                failure {
-                    echo 'Deployment failed!'
-                }
-            }
+        }
+    }
+    
+    post {
+        always {
+            // Publish JUnit test results
+            junit '**/target/surefire-reports/*.xml'
         }
     }
 }
+
 
 
