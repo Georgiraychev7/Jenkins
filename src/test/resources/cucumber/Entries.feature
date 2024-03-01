@@ -4,7 +4,7 @@
     Scenario: Verify Entries response status code and categories count
       Given Call Entries endpoint
       When Get count of entries
-      Then Verify that entries count are 1425
+      Then Verify that entries count are 1427
 
       Scenario Outline: Send request with params
         Given Send request with parameters to entries endpoint where parameter is <parameter> and value is <value>
