@@ -30,6 +30,21 @@ pipeline {
                 }
             }
         }
+        stage('Deploy') {
+            steps {
+                // Deploy artifacts using Maven
+                bat 'mvn deploy'
+            }
+            post {
+                success {
+                    echo 'Deployment successful!'
+                }
+                failure {
+                    echo 'Deployment failed!'
+                }
+            }
+        }
     }
 }
+
 
