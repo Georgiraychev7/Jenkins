@@ -1,30 +1,34 @@
 pipeline {
-  agent any
-  stages {
-    stage('Build') {
-      steps {
-        bat'mvn clean compile'
-      }
-    }
-    stage('Test') {
-        steps {
-            bat'mvn clean test'
-        }
-         post {
-          always {
-            cucumber '**/cucumber.json'
-            script {
-              allure([
-                includeProperties: false,
-                jdk: '',
-                properties: [],
-                reportBuildPolicy: 'ALWAYS',
-                results: [[path: 'target/allure-results']]
-              ])
+    agent any
+    
+    stages {
+        stage('Build') {
+            steps {
+                // Your build steps here
+                bat 'mvn clean compile'
             }
-          }
         }
-  }
-
+        stage('Test') {
+            steps {
+                // Run tests
+                bat 'mvn test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                // Deploy artifacts using Maven
+                bat 'mvn deploy'
+            }
+        }
+    }
+    
+    post {
+        always {
+            // Publish JUnit test results
+            junit '**/target/surefire-reports/*.xml'
+        }
     }
 }
+
+
+
