@@ -73,9 +73,3 @@ Create Cucumber tests with RestAssured for verification of:
 /random
 /entries
 
-Acceptance criteria:
-
-As a trainee, 
-
-I understand Cucumber tests with API
-I understand the smoke and content tests
